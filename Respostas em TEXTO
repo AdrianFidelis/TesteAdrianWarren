@@ -1,0 +1,39 @@
+--Listar todos Clientes que não tenham realizado uma compra;
+
+crate table #TembCostumerID(
+int customer_id
+)
+
+insert into #TembCostumerID( 
+selct customer_id from Sales.customers 
+inner join customers.customer_id = orders.customer_id)
+
+select * from customers 
+where customers.customer_id <> TembCostumerID.customer_id
+
+
+
+--Listar os Produtos que não tenham sido comprados
+
+select product_name  from Production.products as S
+left join Sales.order_items as T on T.product_id = S.product_id 
+where S.product_id IS NULL
+
+--Listar os Produtos sem Estoque;
+
+select * from Sale.Products 
+inner join stocks as S on S.product_id = S.product_id
+where S.quantity = 0
+
+
+--Agrupar a quantidade de vendas que uma determinada Marca por Loja.
+
+select count(order_id) from Sales.Ordes as O 
+inner join Sales.Store as S on S.store_id = O.StoreId
+groupby S.store_name
+
+--Listar os Funcionarios que não estejam relacionados a um Pedido.
+
+select * from Sales.staffs as S
+left join Sales.orders as O on o.staff_id = S.staff_id
+where S.staff_id IS NULL
